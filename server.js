@@ -8,15 +8,29 @@ const utils = require("./utils");
 
 app = express()
 app.use(express.static(path.join(__dirname, "/assets")));
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "./views"));
 
 
-app.get("/dummy", async (req, res) => {
-    const csvData = await utils.readCSV("HackUTD-2023-HomeBuyerInfo.csv");
-    console.log("should be second");
-    // console.log(`length: ${csvData.length}`);
+app.post("/upload_csv1", (req, res) => {
+    console.dir(req);
+
+    res.send("you got here");
+});
+
+
+app.post("/upload_csv", async (req, res) => {
+    var fileName = "HackUTD-2023-HomeBuyerInfo.csv"
+    await utils.readCSV(fileName);
+    
     res.render("index.ejs");
+});
+
+app.get("/upload_csv", (req, res) => {
+    res.render("upload_file.ejs");
 });
 
 app.get("/", (req, res) => {
