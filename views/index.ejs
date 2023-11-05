@@ -13,11 +13,11 @@
 </head>
 
 <body>
-    <form action="/checkApproval">
+    <form action="/checkApproval" method="POST">
         <div>
             <label for="monthlyCarPayment">Monthly Car Payments:</label>
 
-            <input type="number" id="monthlyCarPayment" name="monthlyCarPayment" step="0.01" />
+            <input type="number" id="monthlyCarPayment" name="carPayment" step="0.01" />
         </div>
 
         <br>
@@ -33,7 +33,7 @@
         <div>
             <label for="GrossMonthlyIncome">Gross Monthly Income:</label>
 
-            <input type="number" id="GrossMonthlyIncome" name="GrossMonthlyIncome" step="0.01" />
+            <input type="number" id="GrossMonthlyIncome" name="grossIncome" step="0.01" />
         </div>
 
         <br>
@@ -41,7 +41,7 @@
         <div>
             <label for="Est.monthlyPayment">Est. Monthly Mortgage Payment:</label>
 
-            <input type="number" id="Est.monthlyPayment" name="Est.monthlyPayment" step="0.01" />
+            <input type="number" id="Est.monthlyPayment" name="mortgage" step="0.01" />
         </div>
 
         <br>
@@ -49,7 +49,7 @@
         <div>
             <label for="CreditScore">Credit Score:</label>
 
-            <input type="number" id="CreditScore" name="CreditScore" step="0.01" />
+            <input type="number" id="CreditScore" name="creditScore" step="0.01" />
         </div>
 
         <br>
@@ -57,21 +57,21 @@
         <div>
             <label for="MonthlyCreditCardPayment">Monthly Credit Card Payment:</label>
 
-            <input type="number" id="MonthlyCreditCardPayment" name="MonthlyCreditCardPayment" step="0.01" />
+            <input type="number" id="MonthlyCreditCardPayment" name="cardPayment" step="0.01" />
         </div>
         <br>
 
         <div>
             <label for="HomeAppraisedValue">Home Appraised Value:</label>
 
-            <input type="number" id="HomeAppraisedValue" name="HomeAppraisedValue" step="0.01" />
+            <input type="number" id="HomeAppraisedValue" name="appraisedValue" step="0.01" />
         </div>
         <br>
 
         <div>
             <label for="DownPaymentValue">Down Payment Amount:</label>
 
-            <input type="number" id="DownPaymentValue" name="DownPaymentValue" step="0.01" />
+            <input type="number" id="DownPaymentValue" name="downPayment" step="0.01" />
         </div>
         <br>
 

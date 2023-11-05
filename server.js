@@ -34,32 +34,37 @@ app.get("/upload_csv", (req, res) => {
 });
 
 app.get("/", (req, res) => {
+    res.render('index.ejs');
+});
 
-    var {suggestedActions, sideNotes } = utils.checkApproval(645, 10000, 200, 300, 0, 100000, 7000, 88000, 1800);
+app.post("/checkApproval", (req, res) => {
+    var { creditScore, grossIncome, carPayment, cardPayment,studentLoanPayment, appraisedValue, downPayment, mortgage } = req.body;
+    
 
-    // suggested actions are actions the user should take to get their mortgage approval
-    // next time. If there are none, then the user has been approved
+    creditScore = Number(creditScore);
+    grossIncome = Number(grossIncome);
+    carPayment = Number(carPayment);
+    cardPayment = Number(cardPayment);
+    studentLoanPayment = Number(studentLoanPayment);
+    appraisedValue = Number(appraisedValue);
+    downPayment = Number(downPayment);
+    mortgage = Number(mortgage);
 
+    var loanAmount = appraisedValue - downPayment;
+
+    var {suggestedActions, sideNotes} = utils.checkApproval(creditScore, grossIncome, carPayment, cardPayment,studentLoanPayment, appraisedValue, downPayment, loanAmount, mortgage);
+    
     var totalSuggestedActions = 0;
-    totalSuggestedActions += suggestedActions.creditScore.length;
-    totalSuggestedActions += suggestedActions.LTV.length;
-    totalSuggestedActions += suggestedActions.DTI.length;
-    totalSuggestedActions += suggestedActions.FEDTI.length;
-
-    console.log(sideNotes);
-    console.log(suggestedActions);
-
-    // if user has been approved
+        totalSuggestedActions += suggestedActions.creditScore.length;
+        totalSuggestedActions += suggestedActions.LTV.length;
+        totalSuggestedActions += suggestedActions.DTI.length;
+        totalSuggestedActions += suggestedActions.FEDTI.length; 
+    
     if(totalSuggestedActions == 0){
-        res.send("APPROVED :)");
-        // res.render("successful.ejs", {sideNotes});
+        res.render("successful.ejs", {sideNotes});
+    } else {
+        res.render("unsuccessful.ejs", {suggestedActions});
     }
-
-    else {
-        res.send("not approved :(");
-        // res.render("unsucessful.ejs", {suggestedActions});
-    }
-
 });
 
 app.listen(3000, () => {

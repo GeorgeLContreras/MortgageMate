@@ -7,7 +7,8 @@ const utils = {};
 
 utils.checkApproval = function(creditScore, grossIncome, carPayment, cardPayment,studentLoanPayment, appraisedValue, downPayment, loanAmount, mortgage ){
 
-        console.log(creditScore);
+    console.log("test");
+    console.log(creditScore);
     console.log(grossIncome);
     console.log(carPayment);
     console.log(cardPayment);
@@ -16,7 +17,7 @@ utils.checkApproval = function(creditScore, grossIncome, carPayment, cardPayment
     console.log(downPayment);
     console.log(loanAmount);
     console.log(mortgage);
-
+    console.log("below");
 
     // check if the user is able to afford their mortgage. If not, add suggested
     // actions for each possible limiting factor why loan is not approved

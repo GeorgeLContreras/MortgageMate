@@ -10,7 +10,7 @@
     <h1>Sorry, but at this time you are ineligible to purchase a home.</h1>
     <h1>Here are the reasons why...</h1>
     <div>
-    <% if (suggestedActions.creditScore > 0) { %>
+    <% if (suggestedActions.creditScore.length > 0) { %>
         <h2>Credit Score (along with resources to improve it):</h2>
         <% for (var suggestedAction of suggestedActions.creditScore) { %>
             <h3><%= suggestedAction %></h3>
@@ -18,8 +18,8 @@
     <% } %>
 </div>  
 
-<div>
-    <% if (suggestedActions.LTV > 0) { %>
+<div>      
+    <% if (suggestedActions.LTV.length > 0) { %>
         <h2>Loan-To-Value (along with resources to improve it):</h2>
         <% for (var suggestedAction of suggestedActions.LTV) { %>
             <h3><%= suggestedAction %></h3>
@@ -28,7 +28,7 @@
 </div>  
 
 <div>
-    <% if (suggestedActions.DTI > 0) { %>
+    <% if (suggestedActions.DTI.length > 0) { %>
         <h2>Debt-To-Income (along with resources to improve it):</h2>
         <% for (var suggestedAction of suggestedActions.DTI) { %>
             <h3><%= suggestedAction %></h3>
@@ -37,7 +37,7 @@
 </div>
 
 <div>
-    <% if (suggestedActions.FEDTI > 0) { %>
+    <% if (suggestedActions.FEDTI.length > 0) { %>
         <h2>Federal Debt-To-Income (along with resources to improve it):</h2>
         <% for (var suggestedAction of suggestedActions.FEDTI) { %>
             <h3><%= suggestedAction %></h3>
