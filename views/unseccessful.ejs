@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CannotBuyAHome</title>
+</head>
+<body>
+    <h1>Sorry, but at this time you are ineligible to purchase a home.</h1>
+    <h1>Here are the reasons why...</h1>
+    <div>
+    <% if (suggestedActions.creditScore > 0) { %>
+        <h2>Credit Score (along with resources to improve it):</h2>
+        <% for (var suggestedAction of suggestedActions.creditScore) { %>
+            <h3><%= suggestedAction %></h3>
+        <% } %>
+    <% } %>
+</div>  
+
+<div>
+    <% if (suggestedActions.LTV > 0) { %>
+        <h2>Loan-To-Value (along with resources to improve it):</h2>
+        <% for (var suggestedAction of suggestedActions.LTV) { %>
+            <h3><%= suggestedAction %></h3>
+        <% } %>
+    <% } %>
+</div>  
+
+<div>
+    <% if (suggestedActions.DTI > 0) { %>
+        <h2>Debt-To-Income (along with resources to improve it):</h2>
+        <% for (var suggestedAction of suggestedActions.DTI) { %>
+            <h3><%= suggestedAction %></h3>
+        <% } %>
+    <% } %>
+</div>
+
+<div>
+    <% if (suggestedActions.FEDTI > 0) { %>
+        <h2>Federal Debt-To-Income (along with resources to improve it):</h2>
+        <% for (var suggestedAction of suggestedActions.FEDTI) { %>
+            <h3><%= suggestedAction %></h3>
+        <% } %>
+    <% } %>
+</div> 
+   
+</body>
+</html>
