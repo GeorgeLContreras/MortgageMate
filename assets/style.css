@@ -4,12 +4,7 @@ body {
   padding: 0;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
-  background: rgb(238, 174, 202);
-  background: radial-gradient(
-    circle,
-    rgba(238, 174, 202, 1) 0%,
-    rgba(148, 187, 233, 1) 100%
-  );
+  background-color: rgb(25, 26, 27);
   color: rgb(160, 151, 139);
 }
 
@@ -26,7 +21,6 @@ h1 {
   margin: 0;
   text-align: center;
   padding: 10px;
-  color: rgb(255, 255, 255);
 }
 
 /* Center the form */
@@ -35,7 +29,7 @@ form {
   flex-direction: column;
   align-items: left;
   justify-content: center;
-  background-color: #df744a;
+  background-color: rgb(19, 21, 22);
   border: 1px solid rgb(160, 151, 139);
   border-radius: 5px;
   padding: 20px;
@@ -56,7 +50,7 @@ input[type="number"] {
   width: 100%;
   padding: 5px;
   border: 1px solid #342f2f;
-  background-color: #df744a;
+  background-color: rgb(24, 26, 27);
   border-radius: 3px;
   margin-bottom: 10px;
   color: rgb(0, 0, 0);
@@ -64,7 +58,7 @@ input[type="number"] {
 
 /* Style the submit button */
 button {
-  background-color: #f1cdb0; /* Button background color */
+  background-color: rgb(164, 68, 9); /* Button background color */
   color: rgb(232, 239, 227); /* Button text color */
   padding: 10px 20px;
   border: none;
