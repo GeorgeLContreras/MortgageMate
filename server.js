@@ -1,9 +1,20 @@
 const express = require("express")
+const ejs = require("ejs");
+const path = require("path");
+
 
 const utils = require("./utils");
 
 
 app = express()
+app.use(express.static(path.join(__dirname, "/assets")));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "./views"));
+
+
+app.get("/dummy", (req, res) => {
+    res.render("index.ejs");
+});
 
 app.get("/", (req, res) => {
 
