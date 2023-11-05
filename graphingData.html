@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resizable Bar Graph with Dynamic Color and Label</title>
+    <style>
+        /* Adjust the canvas size */
+        canvas {
+            width: 400px;
+            height: 200px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="barChart"></canvas>
+
+    <div>
+        <p id="labelText">Normal</p>
+    </div>
+
+    <div>
+        <div>
+            <!-- Slider 1 with unique label and value display -->
+            <label for="heightSlider1">Percentage of Car Payments: <span id="heightValue1">50</span></label>
+            <input type="range" id="heightSlider1" min="10" max="100" step="5" value="50">
+        </div>
+        <div>
+            <!-- Slider 2 with unique label and value display -->
+            <label for="heightSlider2">Percentage of Credit Card Payments: <span id="heightValue2">50</span></label>
+            <input type="range" id="heightSlider2" min="10" max="100" step="5" value="50">
+        </div>
+        <div>
+            <!-- Slider 3 with unique label and value display -->
+            <label for="heightSlider3">Percentage of Mortages Made:<span id="heightValue3">50</span></label>
+            <input type="range" id="heightSlider3" min="10" max="100" step="5" value="50">
+        </div>
+        <div>
+            <!-- Slider 4 with value display -->
+            <label for="heightSlider4">Percentage of Gross Income: <span id="heightValue4">50</span></label>
+            <input type="range" id="heightSlider4" min="10" max="100" step="5" value="50">
+        </div>
+    </div>
+
+    <script>
+        const heightSlider1 = document.getElementById('heightSlider1');
+        const heightSlider2 = document.getElementById('heightSlider2');
+        const heightSlider3 = document.getElementById('heightSlider3');
+        const heightSlider4 = document.getElementById('heightSlider4');
+        const heightValue1 = document.getElementById('heightValue1');
+        const heightValue2 = document.getElementById('heightValue2');
+        const heightValue3 = document.getElementById('heightValue3');
+        const heightValue4 = document.getElementById('heightValue4');
+        const labelText = document.getElementById('labelText');
+        const ctx = document.getElementById('barChart').getContext('2d');
+        const data = {
+            labels: ['DTI (Debt-to-income ratio'],
+            datasets: [{
+                label: 'Data measured in percents',
+                data: [50],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+        const barChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        function updateBarHeight() {
+            const value1 = parseInt(heightSlider1.value);
+            const value2 = parseInt(heightSlider2.value);
+            const value3 = parseInt(heightSlider3.value);
+            const value4 = parseInt(heightSlider4.value);
+
+            const sumOfValues = value1 + value2 + value3 + value4;
+            const changeInHeight = sumOfValues / 4;
+            data.datasets[0].data[0] = changeInHeight;
+
+            // Change bar color and label text based on height
+            if (changeInHeight >= 43) {
+                data.datasets[0].backgroundColor = 'rgba(255, 0, 0, 0.2)'; // Red
+                data.datasets[0].borderColor = 'rgba(255, 0, 0, 1)';
+                labelText.textContent = 'Risk';
+            } else if (changeInHeight >= 36) {
+                data.datasets[0].backgroundColor = 'rgba(255, 255, 0, 0.2)'; // Yellow
+                data.datasets[0].borderColor = 'rgba(255, 255, 0, 1)';
+                labelText.textContent = 'Warning';
+            } else if (changeInHeight < 30) {
+                data.datasets[0].backgroundColor = 'rgba(0, 255, 0, 0.2)'; // Green
+                data.datasets[0].borderColor = 'rgba(0, 255, 0, 1)';
+                labelText.textContent = 'Normal';
+            } else {
+                data.datasets[0].backgroundColor = 'rgba(75, 192, 192, 0.2)';
+                data.datasets[0].borderColor = 'rgba(75, 192, 192, 1)';
+                labelText.textContent = 'Excellent';
+            }
+
+            barChart.update();
+        }
+
+        heightSlider1.addEventListener('input', () => {
+            heightValue1.textContent = heightSlider1.value;
+            updateBarHeight();
+        });
+
+        heightSlider2.addEventListener('input', () => {
+            heightValue2.textContent = heightSlider2.value;
+            updateBarHeight();
+        });
+
+        heightSlider3.addEventListener('input', () => {
+            heightValue3.textContent = heightSlider3.value;
+            updateBarHeight();
+        });
+
+        heightSlider4.addEventListener('input', () => {
+            heightValue4.textContent = heightSlider4.value;
+            updateBarHeight();
+        });
+
+        // Initialize the bar height and label
+        updateBarHeight();
+    </script>
+</body>
+</html>
