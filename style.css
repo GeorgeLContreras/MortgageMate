@@ -98,15 +98,7 @@ input[type="number"] {
   border-radius: 3px;
   margin-bottom: 10px;
   transition: background-color 0.3s; /* Add a transition for the background color */
-
+  outline: none;
   /* Define the background color when not focused */
   background-color: #fff;
-}
-
-/* Define background color when focused */
-input[type="number"]:focus {
-  background-color: #43a4e5; /* Change the background color to blue when focused */
-  opacity: 10;
-  color: #fff; /* Change the text color to white for better visibility */
-  outline: none;
 }
