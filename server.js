@@ -26,9 +26,10 @@ app.post("/upload_csv", upload.single("csv_file"), async (req, res) => {
     console.log("eureka!!");
     console.log(req.file);
     var fileName = req.file.filename;
-    await utils.readCSV(fileName);
+    const insights = await utils.readCSV(fileName);
     
-    res.render("newPage.ejs");
+    console.dir(insights);
+    res.render("newPage.ejs", {insights});
 });
 
 

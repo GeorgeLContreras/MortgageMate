@@ -97,6 +97,21 @@ utils.readCSV = function(fileName){
     var csvRows = [];
     var isFirstIteration = true;
 return new Promise((resolve, reject) => {
+    // dictionary with keys as different stats about csv file eg. how many applications,
+    // how many approved, how many NOT approved because of a low credit score (may be amongst
+    // other reasons), etc.
+    var insights = {
+        numberOfApplications : 0,
+        numberOfApprovals : 0,
+        numberTooLowCreditScores: 0,
+        numberTooHighLTV: 0,
+        // numberMediumHighLTV: 0,
+        numberTooHighDTI: 0,
+        // numberMediumHighDTI: 0,
+        numberTooHighFEDTI: 0
+
+    };
+
 fs.createReadStream(fileName)
   .pipe(parse({ delimiter: ",", from_line: 1 }))
   .on("data", function (row) {
@@ -106,6 +121,8 @@ fs.createReadStream(fileName)
         csvHeaders.push("Approved");
         isFirstIteration = false;
     } else {
+        insights.numberOfApplications += 1;
+
         csvRows.push(row);
         
         var id = row[0];
@@ -118,12 +135,30 @@ fs.createReadStream(fileName)
         var loanAmount = Number(row[7]);
         var mortgage = Number(row[8]);
         var creditScore = Number(row[9]);
+        
+        // check whether the current row is approved or not (if any suggested actions, they were not)
         var {suggestedActions, sideNotes} = utils.checkApproval(creditScore, grossIncome, carPayment, cardPayment,studentLoanPayment, appraisedValue, downPayment, loanAmount, mortgage);
         var totalSuggestedActions = 0;
-        totalSuggestedActions += suggestedActions.creditScore.length;
-        totalSuggestedActions += suggestedActions.LTV.length;
-        totalSuggestedActions += suggestedActions.DTI.length;
-        totalSuggestedActions += suggestedActions.FEDTI.length; 
+        if(suggestedActions.creditScore.length > 0){
+            totalSuggestedActions += suggestedActions.creditScore.length;
+            insights.numberTooLowCreditScores += 1;
+        }
+        
+        if(suggestedActions.LTV.length){
+            totalSuggestedActions += suggestedActions.LTV.length;
+            insights.numberTooHighLTV += 1;
+        }
+
+        
+        if(suggestedActions.DTI.length > 0){
+            totalSuggestedActions += suggestedActions.DTI.length;
+            insights.numberTooHighDTI += 1;
+        }
+        
+        if(suggestedActions.FEDTI.length > 0){
+            totalSuggestedActions += suggestedActions.FEDTI.length;
+            insights.numberTooHighFEDTI += 1;
+        }
         
         // add to the array that represents the csv file 'Y' if the user
         //  was approved and 'N' if the user was not
@@ -133,9 +168,11 @@ fs.createReadStream(fileName)
             accepted = 'N';
         } else {
             accepted = 'Y';
+            insights.numberOfApprovals += 1;
         }
 
         csvRows[csvRows.length - 1].push(accepted);
+        
         csvDataMaps.push({
             creditScore, grossIncome, carPayment, cardPayment,studentLoanPayment, appraisedValue, downPayment, loanAmount, mortgage, accepted
         });
@@ -157,7 +194,7 @@ fs.createReadStream(fileName)
         }
 
         else {
-            resolve("FINISHED WRITING TO CSV");
+            resolve(insights)
         }
     });
   })
