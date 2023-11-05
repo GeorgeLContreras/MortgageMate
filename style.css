@@ -1,0 +1,104 @@
+header {
+  background-color: #000000;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 36px;
+  margin: 10px;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+
+/* Apply a background color and center the form */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin: 0;
+  background-color: #f8fbff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: #808080;
+}
+
+form {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+/* Style form labels */
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Style form inputs */
+input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+/* Style the submit button */
+button {
+  background-color: #f5853f;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005fb2;
+}
+
+/* Style form inputs */
+input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.3s; /* Add a transition for the shadow effect */
+
+  /* Define shadow styles when hovering */
+  &:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Add a shadow effect on hover */
+  }
+}
+
+/* Hide up and down arrows for input[type="number"] */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s; /* Add a transition for the background color */
+  outline: none;
+  /* Define the background color when not focused */
+  background-color: #fff;
+}

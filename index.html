@@ -4,33 +4,80 @@
 <head>
     <meta charset="UTF-8">
     <title>MortgageMate</title>
+    <h1>MortgageMate</h1>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <header>
-        <h1></h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section>
-            <h2>Section 1</h2>
-            <p>Content goes here.</p>
-        </section>
-        <section>
-            <h2>Section 2</h2>
-            <p>More content goes here.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 Your Website Name</p>
-    </footer>
+    <form action="/checkApproval">
+        <div>
+            <label for="monthlyCarPayment">Monthly Car Payments:</label>
+
+            <input type="number" id="monthlyCarPayment" name="monthlyCarPayment" step="0.01" />
+        </div>
+
+        <br>
+
+        <div>
+            <label for="studentLoanPayment">Student Loan Payment:</label>
+
+            <input type="number" id="studentLoanPayment" name="studentLoanPayment" step="0.01" />
+        </div>
+
+        <br>
+
+        <div>
+            <label for="GrossMonthlyIncome">Gross Monthly Income:</label>
+
+            <input type="number" id="GrossMonthlyIncome" name="GrossMonthlyIncome" step="0.01" />
+        </div>
+
+        <br>
+
+        <div>
+            <label for="Est.monthlyPayment">Est. Monthly Mortgage Payment:</label>
+
+            <input type="number" id="Est.monthlyPayment" name="Est.monthlyPayment" step="0.01" />
+        </div>
+
+        <br>
+
+        <div>
+            <label for="CreditScore">Credit Score:</label>
+
+            <input type="number" id="CreditScore" name="CreditScore" step="0.01" />
+        </div>
+
+        <br>
+
+        <div>
+            <label for="MonthlyCreditCardPayment">Monthly Credit Card Payment:</label>
+
+            <input type="number" id="MonthlyCreditCardPayment" name="MonthlyCreditCardPayment" step="0.01" />
+        </div>
+        <br>
+
+        <div>
+            <label for="HomeAppraisedValue">Home Appraised Value:</label>
+
+            <input type="number" id="HomeAppraisedValue" name="HomeAppraisedValue" step="0.01" />
+        </div>
+        <br>
+
+        <div>
+            <label for="DownPaymentValue">Down Payment Amount:</label>
+
+            <input type="number" id="DownPaymentValue" name="DownPaymentValue" step="0.01" />
+        </div>
+        <br>
+
+        <button>Calculate My Chances</button>
+    </form>
+
 </body>
 
 </html>
