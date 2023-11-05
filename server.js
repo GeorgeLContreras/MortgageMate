@@ -28,8 +28,9 @@ app.post("/upload_csv", upload.single("csv_file"), async (req, res) => {
     var fileName = req.file.filename;
     const insights = await utils.readCSV(fileName);
     
+    
     console.dir(insights);
-    res.render("newPage.ejs", {insights});
+    res.render("newPage.ejs", {insights, fileName});
 });
 
 
