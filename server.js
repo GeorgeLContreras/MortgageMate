@@ -12,7 +12,10 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "./views"));
 
 
-app.get("/dummy", (req, res) => {
+app.get("/dummy", async (req, res) => {
+    const csvData = await utils.readCSV("HackUTD-2023-HomeBuyerInfo.csv");
+    console.log("should be second");
+    // console.log(`length: ${csvData.length}`);
     res.render("index.ejs");
 });
 

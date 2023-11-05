@@ -1,3 +1,6 @@
+const fs = require("fs");
+const { parse } = require("csv-parse");
+
 const utils = {};
 
 utils.checkApproval = function(creditScore, grossIncome, carPayment, cardPayment,studentLoanPayment, appraisedValue, downPayment, loanAmount, mortgage ){
@@ -74,6 +77,39 @@ utils.checkApproval = function(creditScore, grossIncome, carPayment, cardPayment
     }
 
     return {suggestedActions, sideNotes};
+}
+
+utils.readCSV = function(fileName){
+
+    var csvHeaders = [];
+    var csvData = [];
+    var isFirstIteration = true;
+
+fs.createReadStream(fileName)
+  .pipe(parse({ delimiter: ",", from_line: 1 }))
+  .on("data", function (row) {
+    if(isFirstIteration){
+        csvHeaders = row;
+        console.log(csvHeaders);
+        isFirstIteration = false;
+    } else {
+        var rowData = {};
+        for(var i = 0; i < csvHeaders.length; i++){
+            var header = csvHeaders[i];
+            rowData[header] = row[i];
+        }
+        csvData.push(rowData);
+    }
+
+  })
+  .on("end", function () {
+    console.log("finished");
+    console.log("should be first");
+    return csvData;
+  })
+  .on("error", function (error) {
+    console.log(error.message);
+  });
 }
 
 module.exports = utils;
