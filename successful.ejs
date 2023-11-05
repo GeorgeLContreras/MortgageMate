@@ -8,8 +8,15 @@
 </head>
 <body>
     <div>
-        
+        <h2>Congratulations, You can successfully buy a house!</h2>
     </div>
-    
+
+    <% if (sideNotes.length > 0) { %>
+        <ul>
+            <% for (var sidenote of sideNotes) { %>
+                <li><%= sidenote %></li>
+            <% } %>
+        </ul>
+    <% } %>
 </body>
 </html>
