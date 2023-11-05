@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  background-color: rgb(25, 26, 27);
+  color: rgb(160, 151, 139);
+}
+
+label {
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: rgb(164, 68, 9); /* Button background color */
+  color: rgb(232, 239, 227); /* Button text color */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  width: 20%;
+  margin: 0 auto;
+  font-family: "Montserrat", sans-serif;
+}
+
+input[type="number"] {
+  transition: box-shadow 0.3s;
+}
