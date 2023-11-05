@@ -82,3 +82,11 @@ input[type="number"] {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Add a shadow effect on hover */
   }
 }
+
+/* Hide up and down arrows for input[type="number"] */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
