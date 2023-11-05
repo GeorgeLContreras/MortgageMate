@@ -90,3 +90,23 @@ input[type="number"]::-webkit-outer-spin-button {
   appearance: none;
   margin: 0;
 }
+
+input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s; /* Add a transition for the background color */
+
+  /* Define the background color when not focused */
+  background-color: #fff;
+}
+
+/* Define background color when focused */
+input[type="number"]:focus {
+  background-color: #43a4e5; /* Change the background color to blue when focused */
+  opacity: 10;
+  color: #fff; /* Change the text color to white for better visibility */
+  outline: none;
+}
