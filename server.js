@@ -1,10 +1,10 @@
 const express = require("express")
 const ejs = require("ejs");
 const path = require("path");
-
+const multer = require("multer");
 
 const utils = require("./utils");
-
+var upload = multer({dest: "uploads"});
 
 app = express()
 app.use(express.static(path.join(__dirname, "/assets")));
@@ -22,14 +22,13 @@ app.post("/upload_csv1", (req, res) => {
 });
 
 
-app.post("/upload_csv", async (req, res) => {
+app.post("/upload_csv", upload.single("csv_file"), async (req, res) => {
     console.log("eureka!!");
-    res.send("delete me. check for csv file in request");
-
-    var fileName = "HackUTD-2023-HomeBuyerInfo.csv"
+    console.log(req.file);
+    var fileName = req.file.filename;
     await utils.readCSV(fileName);
     
-    res.render("index.ejs");
+    res.render("newPage.ejs");
 });
 
 

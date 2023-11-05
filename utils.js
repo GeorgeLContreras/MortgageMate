@@ -2,22 +2,13 @@ const fs = require("fs");
 const { parse } = require("csv-parse");
 const {convertArrayToCSV} = require("convert-array-to-csv");
 const converter = require("convert-array-to-csv");
+const path = require("path");
 
 const utils = {};
 
 utils.checkApproval = function(creditScore, grossIncome, carPayment, cardPayment,studentLoanPayment, appraisedValue, downPayment, loanAmount, mortgage ){
 
-    console.log("test");
-    console.log(creditScore);
-    console.log(grossIncome);
-    console.log(carPayment);
-    console.log(cardPayment);
-    console.log(studentLoanPayment);
-    console.log(appraisedValue);
-    console.log(downPayment);
-    console.log(loanAmount);
-    console.log(mortgage);
-    console.log("below");
+
 
     // check if the user is able to afford their mortgage. If not, add suggested
     // actions for each possible limiting factor why loan is not approved
@@ -47,7 +38,6 @@ utils.checkApproval = function(creditScore, grossIncome, carPayment, cardPayment
     if(LTV == NaN){
         throw new Error("Project being dumb");
     }
-    console.log(`ltv: ${LTV}`);
     var monthlyPMI = null;
 
     if(LTV >= .95){
@@ -63,7 +53,7 @@ utils.checkApproval = function(creditScore, grossIncome, carPayment, cardPayment
         // var maxAppraisedValue = loanAmount / .80;
         //  suggestedActions.LTV.push(`Consider purchasing a house of ${maxAppraisedValue} or more to limit the loan-to-value ratio using the given loan amount.`);
     } else if(.80 <= LTV && LTV < .95) {
-        monthlyPMI = .01 * appraisedValue;
+        monthlyPMI = .01 * appraisedValue / 12;
         sideNotes.push(`A monthly private mortgage insurance of ${monthlyPMI} will be required due to a high loan-to-value ratio.`);
     }
 
@@ -73,11 +63,9 @@ utils.checkApproval = function(creditScore, grossIncome, carPayment, cardPayment
     var debt =  frontEndDebt + studentLoanPayment + carPayment + cardPayment;
     creditScore, grossIncome, carPayment, cardPayment,studentLoanPayment, appraisedValue, downPayment, loanAmount, mortgage
 
-    console.log(`debt: ${debt}`);
-    console.log(`income: ${grossIncome}`);
+
     var DTI = debt / grossIncome;
 
-    console.log(`dti: ${DTI}`);
     if(DTI >= .43){
         var maxDebt = .36*grossIncome;
         suggestedActions.DTI.push(`Decrease debt to under $${maxDebt} to lower the Debt-to-Income ratio to under 36%`);
@@ -88,7 +76,6 @@ utils.checkApproval = function(creditScore, grossIncome, carPayment, cardPayment
 
     // check for FEDTI...
     var FEDTI = frontEndDebt / grossIncome;
-    console.log(`fedti: ${FEDTI}`);
     if (FEDTI >= .28){
         var maxDebt = .28 * grossIncome;
         var minIncome = frontEndDebt/.28;
@@ -101,7 +88,7 @@ utils.checkApproval = function(creditScore, grossIncome, carPayment, cardPayment
 }
 
 utils.readCSV = function(fileName){
-
+    fileName = path.join(__dirname, `/uploads/${fileName}`);
     // array of strings where each string is a header in the csv file
     var csvHeaders = [];
     // array where each element is a Map corresponding to the ith+1 row of the csv
@@ -117,7 +104,6 @@ fs.createReadStream(fileName)
     if(isFirstIteration){
         csvHeaders = row;
         csvHeaders.push("Approved");
-        console.log(csvHeaders);
         isFirstIteration = false;
     } else {
         csvRows.push(row);
@@ -158,8 +144,7 @@ fs.createReadStream(fileName)
 
   })
   .on("end", function () {
-    console.log("finished");
-    console.log("should be first");
+
 
     // write over csv file (same as given input, but with a new column dictating whether or not they were approved for a loan)
     const csvFromArrayOfArrays = convertArrayToCSV(csvRows, {
@@ -177,7 +162,6 @@ fs.createReadStream(fileName)
     });
   })
   .on("error", function (error) {
-    console.log(error.message);
     reject("ERROR reading file");
   });
 })
