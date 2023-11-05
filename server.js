@@ -23,15 +23,15 @@ app.post("/upload_csv1", (req, res) => {
 
 
 app.post("/upload_csv", async (req, res) => {
+    console.log("eureka!!");
+    res.send("delete me. check for csv file in request");
+
     var fileName = "HackUTD-2023-HomeBuyerInfo.csv"
     await utils.readCSV(fileName);
     
     res.render("index.ejs");
 });
 
-app.get("/upload_csv", (req, res) => {
-    res.render("upload_file.ejs");
-});
 
 app.get("/", (req, res) => {
     res.render('index.ejs');
@@ -65,6 +65,10 @@ app.post("/checkApproval", (req, res) => {
     } else {
         res.render("unsuccessful.ejs", {suggestedActions});
     }
+});
+
+app.get("/upload_csv", (req, res) => {
+    res.render("getCSV.ejs");
 });
 
 app.listen(3000, () => {
